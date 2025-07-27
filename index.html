@@ -5,18 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI System Optimizer - Unlock Peak PC Performance</title>
     
-    <!-- Fix: Added a default favicon to prevent 404 errors -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     
-    <!-- 
-      Tailwind CSS CDN: This is used for simplicity in this development environment.
-      For a live production website, it is highly recommended to install Tailwind CSS
-      as a PostCSS plugin to get a smaller, optimized CSS file.
-      The console warning about this is expected and can be ignored during development.
-    -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
@@ -25,11 +17,12 @@
             font-family: 'Inter', sans-serif;
             background-color: #020617; /* bg-slate-950 */
             color: #d1d5db; /* text-gray-300 */
+            overflow-x: hidden;
         }
         .glass-card {
             background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(51, 65, 85, 0.4);
         }
         .cta-button {
@@ -50,10 +43,13 @@
                         linear-gradient(120deg, #1e3a8a, #3b82f6, #1e3a8a) border-box;
             display: flex;
             flex-direction: column;
+            transition: all 0.3s ease;
         }
-        .stat-counter, .review-card {
-            transition: all 0.5s ease-out;
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
+
         /* Scroll-triggered animations */
         [data-scroll] {
             transition: opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1), transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -66,20 +62,43 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Aurora Background Effect */
+        .aurora-1 {
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 60%);
+            z-index: -1;
+            animation: pulse 10s infinite alternate;
+        }
+        .aurora-2 {
+            position: absolute;
+            bottom: -30%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(30, 64, 175, 0.2) 0%, rgba(30, 64, 175, 0) 70%);
+            z-index: -1;
+            animation: pulse 12s infinite alternate-reverse;
+        }
+        @keyframes pulse {
+            from { transform: scale(0.8); opacity: 0.7; }
+            to { transform: scale(1.2); opacity: 1; }
+        }
     </style>
 </head>
-<body class="antialiased">
-
-    <!-- CONFIGURATION WARNING BANNER -->
-    <div id="config-warning-banner" class="hidden fixed top-0 left-0 right-0 z-[100] bg-red-800 text-white p-4 text-center shadow-lg">
-        <strong>Configuration Required:</strong> The <code>GUMROAD_PROXY_URL</code> variable appears to be incorrect or unconfigured.
-    </div>
+<body class="antialiased relative">
+    <div class="aurora-1"></div>
+    <div class="aurora-2"></div>
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 glass-card">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <i class="fas fa-microchip text-3xl text-blue-500"></i>
+                <i class="fas fa-microchip text-3xl text-blue-400"></i>
                 <span class="text-xl font-bold text-white">AI System Optimizer</span>
             </div>
             <a href="#pricing" class="cta-button bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg text-sm">Get License</a>
@@ -89,13 +108,11 @@
     <main class="pt-24">
         <!-- Hero Section -->
         <section id="hero" class="py-20 md:py-32 text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-grid-slate-800 [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.2),_transparent_40%)]"></div>
             <div class="container mx-auto px-6 relative">
                 <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
-                    Stop Lagging. Start Winning.
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">Stop Lagging. Start Winning.</span>
                 </h1>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-400 mb-8">
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300 mb-8">
                     AI System Optimizer is the intelligent, silent utility that boosts your PC's performance for gaming and demanding tasks. Install it once and let our AI handle the rest.
                 </p>
                 <a href="#pricing" class="cta-button inline-block bg-blue-600 text-white font-bold text-lg px-10 py-4 rounded-xl">
@@ -108,10 +125,12 @@
         <!-- Hardware Highlight Section -->
         <section class="pb-16" data-scroll="out">
             <div class="container mx-auto px-6 max-w-4xl">
-                <div class="glass-card rounded-xl p-4 text-center flex items-center justify-center">
-                    <p class="font-semibold text-gray-300">
-                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
-                        Rigorously Tested & Optimized for <span class="text-white font-bold">NVIDIA, AMD & Intel GPUs</span>
+                <div class="glass-card rounded-xl p-4 flex items-center justify-center space-x-4">
+                    <svg class="h-8 w-8 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <p class="font-semibold text-gray-200 text-center">
+                        Rigorously Tested & Optimized for <span class="text-white font-bold">NVIDIA Geforce RTX 3050Ti Laptop GPU</span>
                     </p>
                 </div>
             </div>
@@ -131,18 +150,25 @@
         <!-- Social Proof / Insights Section -->
         <section id="insights" class="py-20" data-scroll="out">
             <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                    <div class="glass-card p-8 rounded-2xl">
-                        <p id="sales-counter" class="text-5xl font-bold text-blue-400 stat-counter" data-target="0">0</p>
-                        <p class="text-gray-400 mt-2">Happy Customers</p>
-                    </div>
-                    <div class="glass-card p-8 rounded-2xl">
-                        <p id="rating-stars" class="text-5xl font-bold text-blue-400">...</p>
-                        <p id="rating-text" class="text-gray-400 mt-2">Loading reviews...</p>
-                    </div>
-                    <div class="glass-card p-8 rounded-2xl">
-                        <p id="fps-boost-counter" class="text-5xl font-bold text-blue-400 stat-counter" data-target="18">18</p>
-                        <p class="text-gray-400 mt-2">% Average FPS Boost</p>
+                <div class="glass-card rounded-2xl p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-700">
+                        <!-- Happy Customers -->
+                        <div class="p-4 flex flex-col items-center justify-center">
+                            <p id="sales-counter" class="text-5xl font-bold text-blue-400" data-target="0">0</p>
+                            <p class="text-gray-400 mt-2 text-sm font-medium">Happy Customers</p>
+                        </div>
+                        <!-- Average Rating -->
+                        <div class="p-4 flex flex-col items-center justify-center">
+                            <div id="rating-stars" class="text-4xl text-yellow-400 h-12 flex items-center">...</div>
+                            <p id="rating-text" class="text-gray-400 mt-2 text-sm font-medium">Loading reviews...</p>
+                        </div>
+                        <!-- FPS Boost -->
+                        <div class="p-4 flex flex-col items-center justify-center">
+                            <p class="text-5xl font-bold text-blue-400">
+                                <span id="fps-boost-counter" data-target="18">18</span>%
+                            </p>
+                            <p class="text-gray-400 mt-2 text-sm font-medium">Average FPS Boost</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,16 +201,28 @@
         <!-- Disclaimer Section -->
         <section id="disclaimer" class="pb-20" data-scroll="out">
             <div class="container mx-auto px-6 max-w-4xl">
-                <div class="glass-card rounded-xl p-6 text-center">
-                    <h4 class="font-bold text-lg text-white mb-3">Technical Disclaimer</h4>
-                    <p class="text-sm text-gray-400">
+                <div class="glass-card rounded-xl p-8">
+                    <h4 class="font-bold text-lg text-white mb-4 text-center">Technical Disclaimer</h4>
+                    <p class="text-sm text-gray-400 text-center max-w-2xl mx-auto">
                         The NTC Hook Service provides advanced optimizations and is limited to real-time enhancement of the following technologies:
                     </p>
-                    <div class="mt-4 text-sm text-gray-300 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
-                        <span>1. Neural Texture Compression</span>
-                        <span>2. Neural Programmable Shaders</span>
-                        <span>3. Pixel, Vertex, and Mesh Shaders</span>
-                        <span>4. Path Tracing</span>
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-gray-300">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-blue-400"></i>
+                            <span>Neural Texture Compression</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-blue-400"></i>
+                            <span>Neural Programmable Shaders</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-blue-400"></i>
+                            <span>Pixel, Vertex, and Mesh Shaders</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-blue-400"></i>
+                            <span>Path Tracing</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -196,39 +234,39 @@
                 <h2 class="text-3xl font-bold text-center text-white mb-4">What Our Users Are Saying</h2>
                 <p class="text-center text-gray-400 mb-12">All data, including ratings and reviews, is loaded in real-time from Gumroad.</p>
                 <div id="reviews-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Loading State Placeholder -->
+                    <!-- Loading State Placeholders -->
                     <div class="review-card p-8 rounded-2xl animate-pulse">
-                        <div class="flex items-center mb-4">
+                        <div class="h-4 bg-slate-700 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-slate-700 rounded w-5/6 mb-8"></div>
+                        <div class="flex items-center mt-auto">
                             <div class="w-12 h-12 rounded-full bg-slate-700"></div>
                             <div class="ml-4 flex-1">
                                 <div class="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
                                 <div class="h-3 bg-slate-700 rounded w-1/2"></div>
                             </div>
                         </div>
-                        <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
-                        <div class="h-4 bg-slate-700 rounded w-5/6"></div>
                     </div>
                     <div class="review-card p-8 rounded-2xl animate-pulse hidden lg:flex">
-                         <div class="flex items-center mb-4">
+                        <div class="h-4 bg-slate-700 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-slate-700 rounded w-5/6 mb-8"></div>
+                        <div class="flex items-center mt-auto">
                             <div class="w-12 h-12 rounded-full bg-slate-700"></div>
                             <div class="ml-4 flex-1">
                                 <div class="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
                                 <div class="h-3 bg-slate-700 rounded w-1/2"></div>
                             </div>
                         </div>
-                        <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
-                        <div class="h-4 bg-slate-700 rounded w-5/6"></div>
                     </div>
                     <div class="review-card p-8 rounded-2xl animate-pulse hidden lg:flex">
-                        <div class="flex items-center mb-4">
+                        <div class="h-4 bg-slate-700 rounded w-3/4 mb-4"></div>
+                        <div class="h-4 bg-slate-700 rounded w-5/6 mb-8"></div>
+                        <div class="flex items-center mt-auto">
                             <div class="w-12 h-12 rounded-full bg-slate-700"></div>
                             <div class="ml-4 flex-1">
                                 <div class="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
                                 <div class="h-3 bg-slate-700 rounded w-1/2"></div>
                             </div>
                         </div>
-                        <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
-                        <div class="h-4 bg-slate-700 rounded w-5/6"></div>
                     </div>
                 </div>
             </div>
@@ -265,17 +303,14 @@
     </footer>
 
     <script type="module">
-        // --- ⚠️ CRITICAL CONFIGURATION ⚠️ ---
-        // FIX: Use a relative path for the API URL. This makes the request
-        // go to the same domain as the website, which avoids CORS errors.
-        // Your vercel.json rewrite rule will handle the rest.
+        // --- CONFIGURATION ---
         const GUMROAD_PROXY_URL = '/api/gumroad';
 
         // --- DOM Elements ---
-        const configWarningBanner = document.getElementById('config-warning-banner');
         const salesCounter = document.getElementById('sales-counter');
         const ratingStarsEl = document.getElementById('rating-stars');
         const ratingTextEl = document.getElementById('rating-text');
+        const fpsBoostCounter = document.getElementById('fps-boost-counter');
         const priceDisplay = document.getElementById('price-display');
         const purchaseLink = document.getElementById('purchase-link');
         const copyrightYear = document.getElementById('copyright-year');
@@ -290,14 +325,6 @@
         
         // --- Data Fetching ---
         async function fetchLiveGumroadData() {
-            // This check is now less likely to fail, but good to keep.
-            if (!GUMROAD_PROXY_URL) {
-                console.error("CRITICAL: GUMROAD_PROXY_URL is not set.");
-                if(configWarningBanner) configWarningBanner.classList.remove('hidden');
-                displayErrorState();
-                return;
-            }
-
             console.log("Fetching live data from Gumroad proxy:", GUMROAD_PROXY_URL);
             try {
                 const response = await fetch(GUMROAD_PROXY_URL);
@@ -317,13 +344,11 @@
                 console.error("URL Attempted:", GUMROAD_PROXY_URL);
                 console.error("Error details:", error);
                 displayErrorState();
-                console.log("TROUBLESHOOTING: 1. Double-check your GUMROAD_PROXY_URL in this file. 2. Go to your Vercel dashboard and check the 'Logs' for your serverless function to see if there are any errors there (e.g., missing GUMROAD_ACCESS_TOKEN or GUMROAD_PRODUCT_ID environment variables). 3. Ensure the serverless function includes CORS headers in its response.");
             }
         }
         
         // --- UI Update Functions ---
         function updatePageWithData(data) {
-            // Update Price, Link, and Sales
             if (priceDisplay) {
                 priceDisplay.innerHTML = `${data.formatted_price} <span class="text-lg font-medium text-gray-400">/ one-time</span>`;
             }
@@ -335,21 +360,19 @@
             if (salesCounter) {
                 const targetSales = data.sales_count || 0;
                 salesCounter.setAttribute('data-target', targetSales);
-                if (isElementInViewport(salesCounter)) {
-                    animateCounter(salesCounter, targetSales);
-                    salesCounter.dataset.animated = 'true';
-                }
+                animateCounter(salesCounter, targetSales);
+            }
+            if (fpsBoostCounter) {
+                animateCounter(fpsBoostCounter, 18);
             }
 
-            // Update Average Rating
             if (ratingStarsEl && ratingTextEl) {
                 const avgRating = data.rating_average || 0;
                 const ratingCount = data.rating_count || 0;
-                ratingStarsEl.innerHTML = generateStarIcons(avgRating, 'fa-2x') || 'No Ratings';
+                ratingStarsEl.innerHTML = generateStarIcons(avgRating) || 'No Ratings';
                 ratingTextEl.textContent = ratingCount > 0 ? `From ${ratingCount} Gumroad ratings` : 'Be the first to rate!';
             }
 
-            // Update Reviews Section
             if (reviewsContainer) {
                 updateReviews(data.reviews || []);
             }
@@ -366,14 +389,14 @@
                 const reviewCard = document.createElement('div');
                 reviewCard.className = 'review-card p-8 rounded-2xl';
                 reviewCard.innerHTML = `
-                    <div class="flex items-center mb-4">
+                    <p class="text-gray-300 italic flex-grow mb-6">"${review.content}"</p>
+                    <div class="flex items-center mt-auto">
                         <img src="https://i.pravatar.cc/48?u=${review.avatar_id}" class="w-12 h-12 rounded-full" alt="${review.name}'s avatar">
                         <div class="ml-4">
                             <p class="font-bold text-white">${review.name}</p>
-                            <div class="text-yellow-400 text-xs">${generateStarIcons(review.rating, 'fa-xs')}</div>
+                            <div class="text-yellow-400 text-sm">${generateStarIcons(review.rating, 'fa-sm')}</div>
                         </div>
                     </div>
-                    <p class="text-gray-400 italic flex-grow">"${review.content}"</p>
                 `;
                 reviewsContainer.appendChild(reviewCard);
             });
@@ -390,17 +413,18 @@
                 purchaseLink.classList.remove('bg-blue-600');
             }
             if(reviewsContainer) {
-                reviewsContainer.innerHTML = `<p class="text-red-400 text-center col-span-full">Could not load reviews. This is often due to a CORS error or an incorrect API URL. Please check the console for details.</p>`;
+                reviewsContainer.innerHTML = `<p class="text-red-400 text-center col-span-full">Could not load reviews. Please check the console for details.</p>`;
             }
         }
 
         // --- Animations & Helpers ---
         function animateCounter(counterElement, target) {
-            if (!counterElement || target === undefined) return;
+            if (!counterElement || target === undefined || counterElement.dataset.animated === 'true') return;
+            counterElement.dataset.animated = 'true';
             const start = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
             if (start === target) return;
             
-            const duration = 1500;
+            const duration = 2000;
             let startTime = null;
 
             function animation(currentTime) {
@@ -418,9 +442,9 @@
         function generateStarIcons(rating, sizeClass = '') {
             let starsHtml = '';
             for(let i = 1; i <= 5; i++) {
-                if (i <= rating) starsHtml += `<i class="fas fa-star text-yellow-400 ${sizeClass}"></i>`;
-                else if (i - 0.5 <= rating) starsHtml += `<i class="fas fa-star-half-alt text-yellow-400 ${sizeClass}"></i>`;
-                else starsHtml += `<i class="far fa-star text-yellow-400 ${sizeClass}"></i>`;
+                if (i <= rating) starsHtml += `<i class="fas fa-star ${sizeClass}"></i>`;
+                else if (i - 0.5 <= rating) starsHtml += `<i class="fas fa-star-half-alt ${sizeClass}"></i>`;
+                else starsHtml += `<i class="far fa-star ${sizeClass}"></i>`;
             }
             return starsHtml;
         }
@@ -431,13 +455,9 @@
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.setAttribute("data-scroll", "in");
-                        const counters = entry.target.querySelectorAll('.stat-counter');
+                        const counters = entry.target.querySelectorAll('[data-target]');
                         counters.forEach(counter => {
-                            const target = +counter.getAttribute('data-target');
-                            if (target !== undefined && !counter.dataset.animated) {
-                                animateCounter(counter, target);
-                                counter.dataset.animated = 'true';
-                            }
+                            animateCounter(counter, +counter.getAttribute('data-target'));
                         });
                     }
                 });
@@ -447,18 +467,6 @@
                 scrollObserver.observe(el);
             });
         }
-        
-        function isElementInViewport(el) {
-            if (!el) return false;
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
-
     </script>
 </body>
 </html>
