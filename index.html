@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI System Optimizer - Unlock Peak PC Performance</title>
-    <!-- Tailwind CSS for styling -->
+    
+    <!-- Fix: Added a default favicon to prevent 404 errors -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    
+    <!-- 
+      Tailwind CSS CDN: This is used for simplicity in this development environment.
+      For a live production website, it is highly recommended to install Tailwind CSS
+      as a PostCSS plugin to get a smaller, optimized CSS file.
+      The console warning about this is expected and can be ignored during development.
+    -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         body {
@@ -61,7 +72,7 @@
 
     <!-- CONFIGURATION WARNING BANNER -->
     <div id="config-warning-banner" class="hidden fixed top-0 left-0 right-0 z-[100] bg-red-800 text-white p-4 text-center shadow-lg">
-        <strong>Configuration Required:</strong> Please update the <code>GUMROAD_PROXY_URL</code> variable in this HTML file with your live Vercel deployment URL to enable live data.
+        <strong>Configuration Required:</strong> The <code>GUMROAD_PROXY_URL</code> variable appears to be incorrect or unconfigured.
     </div>
 
     <!-- Header -->
@@ -255,10 +266,9 @@
 
     <script type="module">
         // --- ⚠️ CRITICAL CONFIGURATION ⚠️ ---
-        // AFTER DEPLOYING TO VERCEL, PASTE YOUR LIVE URL HERE.
-        // It should look like: 'https://your-project-name.vercel.app/api/gumroad'
-        // --- ----------------------------------------------------------------- ---
-        const GUMROAD_PROXY_URL = 'https://ai-optimizer-website-kpohxvzks.vercel.app/api/gumroad'; // <-- PASTE YOUR LIVE VERCEL URL HERE
+        // Fix: Populated the URL from your Vercel error logs.
+        // This MUST point to your live Vercel API deployment.
+        const GUMROAD_PROXY_URL = 'https://ai-optimizer-website-kpohxvzks.vercel.app/api/gumroad';
 
         // --- DOM Elements ---
         const configWarningBanner = document.getElementById('config-warning-banner');
@@ -290,7 +300,7 @@
             try {
                 const response = await fetch(GUMROAD_PROXY_URL);
                 if (!response.ok) {
-                    const errorData = await response.json();
+                    const errorData = await response.json().catch(() => ({ details: "Could not parse error response from server." }));
                     throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorData.details}`);
                 }
                 const data = await response.json();
@@ -305,7 +315,7 @@
                 console.error("URL Attempted:", GUMROAD_PROXY_URL);
                 console.error("Error details:", error);
                 displayErrorState();
-                console.log("TROUBLESHOOTING: 1. Double-check your GUMROAD_PROXY_URL in this file. 2. Go to your Vercel dashboard and check the 'Logs' for your serverless function to see if there are any errors there (e.g., missing GUMROAD_ACCESS_TOKEN or GUMROAD_PRODUCT_ID environment variables).");
+                console.log("TROUBLESHOOTING: 1. Double-check your GUMROAD_PROXY_URL in this file. 2. Go to your Vercel dashboard and check the 'Logs' for your serverless function to see if there are any errors there (e.g., missing GUMROAD_ACCESS_TOKEN or GUMROAD_PRODUCT_ID environment variables). 3. Ensure the serverless function includes CORS headers in its response.");
             }
         }
         
@@ -378,7 +388,7 @@
                 purchaseLink.classList.remove('bg-blue-600');
             }
             if(reviewsContainer) {
-                reviewsContainer.innerHTML = `<p class="text-red-400 text-center col-span-full">Could not load reviews. Please check the configuration.</p>`;
+                reviewsContainer.innerHTML = `<p class="text-red-400 text-center col-span-full">Could not load reviews. This is often due to a CORS error or an incorrect API URL. Please check the console for details.</p>`;
             }
         }
 
