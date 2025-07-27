@@ -39,7 +39,7 @@ export default async function handler(request, response) {
       throw new Error(`Gumroad Product API responded with status ${productRes.status}. Details: ${errorBody}`);
     }
     
-    // FIX: The reviews API call can fail with a 404 if there are no reviews.
+    // The reviews API call can fail with a 404 if there are no reviews.
     // We will handle this case gracefully instead of crashing the server.
     let reviewsData;
     if (reviewsRes.ok) {
@@ -56,10 +56,12 @@ export default async function handler(request, response) {
     const productData = await productRes.json();
 
     // Step 5: Sanitize and structure the data to send back to the frontend
+    // FIX: Use optional chaining (?.) and nullish coalescing (||) to safely access
+    // rating data. If product.rating doesn't exist, it will default to 0.
     const responseData = {
       sales_count: productData.product.sales_count,
-      rating_average: parseFloat(productData.product.rating.average_rating),
-      rating_count: productData.product.rating.count,
+      rating_average: parseFloat(productData.product.rating?.average_rating || 0),
+      rating_count: productData.product.rating?.count || 0,
       formatted_price: productData.product.formatted_price,
       permalink: productData.product.permalink,
       reviews: reviewsData.reviews.map(review => ({
