@@ -40,7 +40,6 @@ export default async function handler(request, response) {
     }
     
     // The reviews API call can fail with a 404 if there are no reviews.
-    // We will handle this case gracefully instead of crashing the server.
     let reviewsData;
     if (reviewsRes.ok) {
         reviewsData = await reviewsRes.json();
@@ -48,22 +47,27 @@ export default async function handler(request, response) {
         console.log("Gumroad reviews returned 404. This is normal if there are no reviews yet. Proceeding with an empty list.");
         reviewsData = { success: true, reviews: [] }; // Provide a default empty structure
     } else {
-        // For any other error (500, 401, etc.), it's a real problem.
         const errorBody = await reviewsRes.text();
         throw new Error(`Gumroad Reviews API responded with status ${reviewsRes.status}. Details: ${errorBody}`);
     }
     
     const productData = await productRes.json();
 
+    // FINAL FIX: Add a strict check to ensure the permalink exists.
+    // If the product is not public/published, Gumroad may not return a permalink.
+    const permalink = productData.product.permalink;
+    if (!permalink) {
+      console.error("CRITICAL: Product data was fetched successfully, but it does not contain a permalink. This usually means the product is not published on Gumroad. Full product data received:", JSON.stringify(productData, null, 2));
+      throw new Error("Product data is missing a permalink.");
+    }
+
     // Step 5: Sanitize and structure the data to send back to the frontend
-    // FIX: Use optional chaining (?.) and nullish coalescing (||) to safely access
-    // rating data. If product.rating doesn't exist, it will default to 0.
     const responseData = {
       sales_count: productData.product.sales_count,
       rating_average: parseFloat(productData.product.rating?.average_rating || 0),
       rating_count: productData.product.rating?.count || 0,
       formatted_price: productData.product.formatted_price,
-      permalink: productData.product.permalink,
+      permalink: permalink, // Use the validated permalink
       reviews: reviewsData.reviews.map(review => ({
           name: review.user_name,
           rating: review.rating,
