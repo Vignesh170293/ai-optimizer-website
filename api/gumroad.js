@@ -32,17 +32,28 @@ export default async function handler(request, response) {
     ]);
 
     // Step 4: Check if the Gumroad API calls were successful
+    
+    // The product API call MUST succeed.
     if (!productRes.ok) {
       const errorBody = await productRes.text();
       throw new Error(`Gumroad Product API responded with status ${productRes.status}. Details: ${errorBody}`);
     }
-    if (!reviewsRes.ok) {
-      const errorBody = await reviewsRes.text();
-      throw new Error(`Gumroad Reviews API responded with status ${reviewsRes.status}. Details: ${errorBody}`);
+    
+    // FIX: The reviews API call can fail with a 404 if there are no reviews.
+    // We will handle this case gracefully instead of crashing the server.
+    let reviewsData;
+    if (reviewsRes.ok) {
+        reviewsData = await reviewsRes.json();
+    } else if (reviewsRes.status === 404) {
+        console.log("Gumroad reviews returned 404. This is normal if there are no reviews yet. Proceeding with an empty list.");
+        reviewsData = { success: true, reviews: [] }; // Provide a default empty structure
+    } else {
+        // For any other error (500, 401, etc.), it's a real problem.
+        const errorBody = await reviewsRes.text();
+        throw new Error(`Gumroad Reviews API responded with status ${reviewsRes.status}. Details: ${errorBody}`);
     }
     
     const productData = await productRes.json();
-    const reviewsData = await reviewsRes.json();
 
     // Step 5: Sanitize and structure the data to send back to the frontend
     const responseData = {
