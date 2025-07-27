@@ -1,0 +1,16 @@
+{
+  "name": "gumroad-api-proxy",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "devDependencies": {
+    "vercel": "^34.2.0"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}
