@@ -77,7 +77,8 @@ export default async function handler(request, response) {
     };
     
     // Step 6: Send the combined data back to your website
-    response.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate');
+    // DEBUG: Temporarily disabled caching to ensure fresh data from Gumroad.
+    // response.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate');
     return response.status(200).json(responseData);
 
   } catch (error) {
