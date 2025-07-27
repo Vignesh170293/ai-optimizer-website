@@ -53,21 +53,15 @@ export default async function handler(request, response) {
     
     const productData = await productRes.json();
 
-    // FINAL FIX: Add a strict check to ensure the permalink exists.
-    // If the product is not public/published, Gumroad may not return a permalink.
-    const permalink = productData.product.permalink;
-    if (!permalink) {
-      console.error("CRITICAL: Product data was fetched successfully, but it does not contain a permalink. This usually means the product is not published on Gumroad. Full product data received:", JSON.stringify(productData, null, 2));
-      throw new Error("Product data is missing a permalink.");
-    }
-
     // Step 5: Sanitize and structure the data to send back to the frontend
     const responseData = {
       sales_count: productData.product.sales_count,
+      // Safely access rating data, providing 0 as a default if it doesn't exist.
       rating_average: parseFloat(productData.product.rating?.average_rating || 0),
       rating_count: productData.product.rating?.count || 0,
       formatted_price: productData.product.formatted_price,
-      permalink: permalink, // Use the validated permalink
+      // This is the field that causes the 'Secure Purchase' error if it's missing from the API response.
+      permalink: productData.product.permalink, 
       reviews: reviewsData.reviews.map(review => ({
           name: review.user_name,
           rating: review.rating,
@@ -76,9 +70,8 @@ export default async function handler(request, response) {
       }))
     };
     
-    // Step 6: Send the combined data back to your website
-    // DEBUG: Temporarily disabled caching to ensure fresh data from Gumroad.
-    // response.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate');
+    // Step 6: Send the combined data back to your website with caching re-enabled.
+    response.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate');
     return response.status(200).json(responseData);
 
   } catch (error) {
