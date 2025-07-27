@@ -3,32 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI System Optimizer - Peak Performance for Your PC</title>
+    <title>AI System Optimizer - Unlock Peak PC Performance</title>
+    <!-- 
+      Note: The Tailwind CDN is used here for simplicity in this self-contained example.
+      For a production environment, it is recommended to install Tailwind CSS as a PostCSS plugin.
+    -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #030712; /* bg-gray-950 */
+            background-color: #020617; /* bg-slate-950 */
             color: #d1d5db; /* text-gray-300 */
         }
         .glass-card {
-            background: rgba(17, 24, 39, 0.6); /* bg-gray-900 with opacity */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(55, 65, 81, 0.3); /* border-gray-700 with opacity */
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.4);
         }
         .cta-button {
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 5px rgba(59, 130, 246, 0.2) inset;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 8px rgba(59, 130, 246, 0.3) inset;
         }
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.3) inset;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 35px rgba(59, 130, 246, 0.6), 0 0 12px rgba(59, 130, 246, 0.4) inset;
+        }
+        .feature-icon {
+            background: linear-gradient(145deg, rgba(30, 64, 175, 0.3), rgba(37, 99, 235, 0.3));
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+        }
+        .stat-counter {
+            transition: all 0.5s ease-out;
+        }
+        [data-scroll] {
+            transition: opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1), transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        [data-scroll="out"] {
+            opacity: 0;
+            transform: translateY(3rem);
+        }
+        [data-scroll="in"] {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body class="antialiased">
+
+    <!-- CONFIGURATION WARNING BANNER -->
+    <div id="config-warning-banner" class="hidden fixed top-0 left-0 right-0 z-[100] bg-red-800 text-white p-4 text-center shadow-lg">
+        <strong>Configuration Required:</strong> Please update the <code>GUMROAD_PROXY_URL</code> variable in this HTML file with your live Vercel deployment URL to enable live data.
+    </div>
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 glass-card">
@@ -37,33 +65,31 @@
                 <i class="fas fa-microchip text-3xl text-blue-500"></i>
                 <span class="text-xl font-bold text-white">AI System Optimizer</span>
             </div>
-            <nav class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#features" class="hover:text-blue-400 transition-colors">Features</a>
-                <a href="#how-it-works" class="hover:text-blue-400 transition-colors">How It Works</a>
-                <a href="#pricing" class="hover:text-blue-400 transition-colors">Pricing</a>
-            </nav>
-            <a href="#pricing" class="cta-button bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg text-sm">Buy Now</a>
+            <a href="#pricing" class="cta-button bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg text-sm">Get License</a>
         </div>
     </header>
 
     <main class="pt-24">
         <!-- Hero Section -->
-        <section id="hero" class="py-20 md:py-32 text-center">
-            <div class="container mx-auto px-6">
+        <section id="hero" class="py-20 md:py-32 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-slate-800 [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.2),_transparent_40%)]"></div>
+            <div class="container mx-auto px-6 relative">
                 <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
-                    Unlock Your PC's True Potential.
+                    Stop Lagging. Start Winning.
                 </h1>
                 <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-400 mb-8">
-                    AI System Optimizer is a silent background utility that dynamically adjusts your PC's resources, delivering peak performance for gaming and demanding tasks without the hassle.
+                    AI System Optimizer is the intelligent, silent utility that boosts your PC's performance for gaming and demanding tasks. Install it once and let our AI handle the rest.
                 </p>
                 <a href="#pricing" class="cta-button inline-block bg-blue-600 text-white font-bold text-lg px-10 py-4 rounded-xl">
-                    Get Peak Performance Today
+                    Unlock Peak Performance Now
                 </a>
+                <div class="mt-4 text-xs text-gray-500">Lifetime License • One-Time Purchase</div>
             </div>
         </section>
 
         <!-- Hardware Highlight Section -->
-        <section class="pb-16">
+        <section class="pb-16" data-scroll="out">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="glass-card rounded-xl p-4 text-center flex items-center justify-center">
                     <p class="font-semibold text-gray-300">
@@ -74,35 +100,65 @@
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section id="features" class="py-20">
+        <!-- Live Demo GIF Section -->
+        <section id="demo" class="py-20" data-scroll="out">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl font-bold text-white mb-4">See It In Action</h2>
+                 <p class="text-gray-400 max-w-2xl mx-auto mb-12">Watch how the optimizer seamlessly switches profiles and boosts performance in real-time.</p>
+                 <div class="glass-card rounded-2xl p-2 md:p-4">
+                     <img src="https://placehold.co/1200x675/020617/d1d5db?text=Your+Awesome+Demo+GIF+Here" alt="AI System Optimizer live demo GIF" class="w-full h-auto rounded-lg shadow-2xl" onerror="this.onerror=null; this.src='https://placehold.co/1200x675/020617/d1d5db?text=Image+Not+Found';">
+                 </div>
+            </div>
+        </section>
+
+        <!-- Social Proof / Insights Section -->
+        <section id="insights" class="py-20" data-scroll="out">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-12">Why AI System Optimizer?</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Feature Card 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div class="glass-card p-8 rounded-2xl">
-                        <i class="fas fa-robot text-3xl text-blue-400 mb-4"></i>
-                        <h3 class="text-xl font-bold text-white mb-2">Intelligent Background Service</h3>
-                        <p class="text-gray-400 text-sm">Runs silently in your system tray, using minimal resources. It only acts when needed, so you can focus on your work or game.</p>
+                        <p id="sales-counter" class="text-5xl font-bold text-blue-400 stat-counter" data-target="0">0</p>
+                        <p class="text-gray-400 mt-2">Happy Customers</p>
                     </div>
-                    <!-- Feature Card 2 -->
                     <div class="glass-card p-8 rounded-2xl">
-                        <i class="fas fa-gamepad text-3xl text-blue-400 mb-4"></i>
-                        <h3 class="text-xl font-bold text-white mb-2">Dynamic Performance Profiles</h3>
-                        <p class="text-gray-400 text-sm">Automatically switches between Balanced, Performance, and Power Saver modes based on the application you're using.</p>
+                        <p class="text-5xl font-bold text-blue-400">
+                            <span id="rating-stars">...</span>
+                        </p>
+                        <p id="rating-text" class="text-gray-400 mt-2">Loading reviews...</p>
                     </div>
-                    <!-- Feature Card 3 -->
                     <div class="glass-card p-8 rounded-2xl">
-                        <i class="fas fa-cogs text-3xl text-blue-400 mb-4"></i>
-                        <h3 class="text-xl font-bold text-white mb-2">Advanced Hooking Engine</h3>
-                        <p class="text-gray-400 text-sm">Leverages the powerful NTC Hook Service to apply deep, real-time optimizations for graphically intensive applications.</p>
+                        <p id="fps-boost-counter" class="text-5xl font-bold text-blue-400 stat-counter" data-target="18">18</p>
+                        <p class="text-gray-400 mt-2">% Average FPS Boost</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Features Section -->
+        <section id="features" class="py-20" data-scroll="out">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-white mb-16">The Ultimate PC Enhancement Suite</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-4">
+                        <div class="feature-icon w-16 h-16 rounded-2xl inline-flex items-center justify-center mb-4"><i class="fas fa-robot text-3xl text-blue-300"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Intelligent Background Service</h3>
+                        <p class="text-gray-400 text-sm">Runs silently in your system tray, only acting when needed. Zero interruptions, maximum performance.</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="feature-icon w-16 h-16 rounded-2xl inline-flex items-center justify-center mb-4"><i class="fas fa-gamepad text-3xl text-blue-300"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Dynamic Performance Profiles</h3>
+                        <p class="text-gray-400 text-sm">Automatically switches profiles based on your active application for a truly set-and-forget experience.</p>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="feature-icon w-16 h-16 rounded-2xl inline-flex items-center justify-center mb-4"><i class="fas fa-cogs text-3xl text-blue-300"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Advanced Hooking Engine</h3>
+                        <p class="text-gray-400 text-sm">Leverages our NTC Hook Service for deep, real-time graphics pipeline optimizations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- Disclaimer Section -->
-        <section id="disclaimer" class="pb-20">
+        <section id="disclaimer" class="pb-20" data-scroll="out">
             <div class="container mx-auto px-6 max-w-4xl">
                 <div class="glass-card rounded-xl p-6 text-center">
                     <h4 class="font-bold text-lg text-white mb-3">Technical Disclaimer</h4>
@@ -119,50 +175,189 @@
             </div>
         </section>
 
-        <!-- How It Works Section -->
-        <section id="how-it-works" class="py-20">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-white mb-4">Simple, Powerful, and Effective.</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto mb-12">Install it once and let the AI do the work. Control everything from a clean, simple web dashboard.</p>
-                <div class="glass-card rounded-2xl p-4">
-                    <!-- FIX: Changed src to a relative path. Assumes the image is in the same folder as this HTML file. -->
-                    <img src="dashboard_screenshot.png" alt="AI System Optimizer Dashboard Screenshot" class="w-full h-auto rounded-lg shadow-2xl" onerror="this.onerror=null; this.src='https://placehold.co/1200x600/111827/d1d5db?text=Dashboard+Screenshot+Not+Found';">
-                </div>
-            </div>
-        </section>
-        
         <!-- Pricing Section -->
-        <section id="pricing" class="py-20">
+        <section id="pricing" class="py-20" data-scroll="out">
             <div class="container mx-auto px-6 max-w-md">
                 <div class="glass-card rounded-2xl p-8 text-center border-2 border-blue-500/50 shadow-2xl">
                     <h3 class="text-2xl font-bold text-white">Get a Lifetime License</h3>
-                    <p class="text-5xl font-extrabold text-white my-4">₹1,299 <span class="text-lg font-medium text-gray-400">/ one-time</span></p>
-                    <p class="text-gray-400 mb-6">One payment for lifetime access to all features and future updates for version 1.x.</p>
-                    <ul class="text-left space-y-3 mb-8">
+                    <p id="price-display" class="text-5xl font-extrabold text-white my-4">Loading...</p>
+                    <ul id="features-list" class="text-left space-y-3 mb-8 text-gray-400">
                         <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-3"></i>Silent Background Operation</li>
                         <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-3"></i>All Performance Profiles</li>
                         <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-3"></i>Advanced Hooking Engine</li>
                         <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-3"></i>Lifetime Updates (v1.x)</li>
                         <li class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-3"></i>Premium Support</li>
                     </ul>
-                    <!-- ================================================================== -->
-                    <!-- IMPORTANT: REPLACE THIS HREF WITH YOUR GUMROAD/RAZORPAY LINK      -->
-                    <!-- ================================================================== -->
-                    <a href="https://vigneshmurugan8.gumroad.com/l/rdcvzn" class="cta-button w-full block bg-blue-600 text-white font-bold text-lg py-4 rounded-xl">
-                        <i class="fas fa-lock mr-2"></i>Secure Purchase
+                    <a id="purchase-link" href="#" class="cta-button w-full block bg-blue-600 text-white font-bold text-lg py-4 rounded-xl pointer-events-none opacity-50">
+                        <i class="fas fa-spinner fa-spin mr-2"></i>Loading Link...
                     </a>
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-800 mt-20">
+    <footer class="border-t border-slate-800 mt-20">
         <div class="container mx-auto px-6 py-8 text-center text-sm text-gray-500">
-            <p>&copy; 2025 Self-Proprietor Ownership. All Rights Reserved.</p>
+            <p>&copy; <span id="copyright-year">2025</span> Self-Proprietor Ownership. All Rights Reserved.</p>
             <p class="mt-2">AI System Optimizer is a standalone product. All trademarks are the property of their respective owners.</p>
         </div>
     </footer>
 
+    <script type="module">
+        // --- ⚠️ CRITICAL CONFIGURATION ⚠️ ---
+        // --- YOU MUST REPLACE THE LINE BELOW WITH YOUR REAL VERCEL URL ---
+        // --- For example: const GUMROAD_PROXY_URL = 'https://my-project-name.vercel.app/api/gumroad'; ---
+        const GUMROAD_PROXY_URL = 'https://gumroad-api-proxy-v3-d9f1bfjs7.vercel.app/api/gumroad';
+        
+        // --- DOM Elements ---
+        const configWarningBanner = document.getElementById('config-warning-banner');
+        const salesCounter = document.getElementById('sales-counter');
+        const ratingStars = document.getElementById('rating-stars');
+        const ratingText = document.getElementById('rating-text');
+        const priceDisplay = document.getElementById('price-display');
+        const purchaseLink = document.getElementById('purchase-link');
+        const copyrightYear = document.getElementById('copyright-year');
+
+        // --- Main Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            if(copyrightYear) copyrightYear.textContent = new Date().getFullYear();
+            setupScrollAnimations();
+            fetchLiveGumroadData();
+        });
+        
+        // --- Data Fetching ---
+        async function fetchLiveGumroadData() {
+            if (!GUMROAD_PROXY_URL || GUMROAD_PROXY_URL.includes('PASTE-YOUR-LIVE-VERCEL-URL-HERE')) {
+                console.error("CRITICAL: GUMROAD_PROXY_URL is not set. Please update the script with your live Vercel URL.");
+                if(configWarningBanner) configWarningBanner.classList.remove('hidden');
+                
+                if(priceDisplay) priceDisplay.textContent = "Setup Needed";
+                if(salesCounter) salesCounter.textContent = "N/A";
+                if(ratingText) ratingText.textContent = "Config Error";
+                if(purchaseLink) {
+                    purchaseLink.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i>Configure URL`;
+                    purchaseLink.classList.add('bg-red-600', 'hover:bg-red-700');
+                }
+                return;
+            }
+
+            console.log("Fetching live data from Gumroad proxy:", GUMROAD_PROXY_URL);
+            try {
+                const response = await fetch(GUMROAD_PROXY_URL);
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok. Status: ${response.status}`);
+                }
+                const data = await response.json();
+                if (data.error) {
+                    throw new Error(`API Proxy Error: ${data.details || data.error}`);
+                }
+                
+                updateGumroadStats(data);
+            } catch (error) {
+                console.error("--- GUMROAD FETCH FAILED ---");
+                console.error("URL Attempted:", GUMROAD_PROXY_URL);
+                console.error("Error details:", error);
+                
+                if(priceDisplay) priceDisplay.textContent = "N/A";
+                if(salesCounter) salesCounter.textContent = "N/A";
+                if(ratingText) ratingText.textContent = "Data Error";
+                if(purchaseLink) purchaseLink.innerHTML = `<i class="fas fa-times-circle mr-2"></i>Unavailable`;
+
+                console.log("TROUBLESHOOTING: 1. Double-check your GUMROAD_PROXY_URL in the HTML. 2. Go to your Vercel dashboard and check the 'Logs' for your serverless function to see if there are any errors there (e.g., missing GUMROAD_ACCESS_TOKEN).");
+            }
+        }
+        
+        // --- UI Update Functions ---
+        function updateGumroadStats(product) {
+            if (priceDisplay) priceDisplay.textContent = product.formatted_price;
+            
+            if (purchaseLink) {
+                purchaseLink.href = `https://gumroad.com/l/${product.permalink}`;
+                purchaseLink.classList.remove('pointer-events-none', 'opacity-50');
+                purchaseLink.innerHTML = `<i class="fas fa-lock mr-2"></i>Secure Purchase`;
+            }
+            
+            if (salesCounter) {
+                const targetSales = product.sales_count || 0;
+                salesCounter.setAttribute('data-target', targetSales);
+                if (isElementInViewport(salesCounter)) {
+                    animateCounter(salesCounter, targetSales);
+                    salesCounter.dataset.animated = 'true';
+                }
+            }
+
+            if (ratingStars && ratingText) {
+                const avgRating = product.rating_average || 0;
+                const ratingCount = product.rating_count || 0;
+                let starsHtml = '';
+                for(let i = 1; i <= 5; i++) {
+                    if (i <= avgRating) starsHtml += '<i class="fas fa-star text-yellow-400"></i>';
+                    else if (i - 0.5 <= avgRating) starsHtml += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+                    else starsHtml += '<i class="far fa-star text-yellow-400"></i>';
+                }
+                ratingStars.innerHTML = starsHtml || 'No Ratings Yet';
+                ratingText.textContent = ratingCount > 0 ? `From ${ratingCount} Gumroad ratings` : 'Be the first to rate!';
+            }
+        }
+
+        // --- Animations ---
+        function animateCounter(counterElement, target) {
+            if (!counterElement || target === undefined) return;
+            const start = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
+            if (start === target) return;
+            
+            const duration = 1500;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const currentCount = Math.floor(progress * (target - start) + start);
+                counterElement.innerText = currentCount.toLocaleString();
+                if (progress < 1) {
+                    requestAnimationFrame(animation);
+                }
+            }
+            requestAnimationFrame(animation);
+        }
+
+        function setupScrollAnimations() {
+            const scrollElements = document.querySelectorAll("[data-scroll]");
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.setAttribute("data-scroll", "in");
+                        const counters = entry.target.querySelectorAll('.stat-counter');
+                        counters.forEach(counter => {
+                            const target = +counter.getAttribute('data-target');
+                            if (target !== undefined && !counter.dataset.animated) {
+                                animateCounter(counter, target);
+                                counter.dataset.animated = 'true';
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            scrollElements.forEach((el) => {
+                scrollObserver.observe(el);
+            });
+        }
+        
+        // --- Helpers ---
+        function isElementInViewport(el) {
+            if (!el) return false;
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+    </script>
 </body>
 </html>
