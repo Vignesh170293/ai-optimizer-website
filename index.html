@@ -266,9 +266,10 @@
 
     <script type="module">
         // --- ⚠️ CRITICAL CONFIGURATION ⚠️ ---
-        // Fix: Populated the URL from your Vercel error logs.
-        // This MUST point to your live Vercel API deployment.
-        const GUMROAD_PROXY_URL = 'https://ai-optimizer-website-kpohxvzks.vercel.app/api/gumroad';
+        // FIX: Use a relative path for the API URL. This makes the request
+        // go to the same domain as the website, which avoids CORS errors.
+        // Your vercel.json rewrite rule will handle the rest.
+        const GUMROAD_PROXY_URL = '/api/gumroad';
 
         // --- DOM Elements ---
         const configWarningBanner = document.getElementById('config-warning-banner');
@@ -289,8 +290,9 @@
         
         // --- Data Fetching ---
         async function fetchLiveGumroadData() {
-            if (!GUMROAD_PROXY_URL || GUMROAD_PROXY_URL.includes('PASTE-YOUR-LIVE-VERCEL-URL-HERE')) {
-                console.error("CRITICAL: GUMROAD_PROXY_URL is not set. Please update the script with your live Vercel URL.");
+            // This check is now less likely to fail, but good to keep.
+            if (!GUMROAD_PROXY_URL) {
+                console.error("CRITICAL: GUMROAD_PROXY_URL is not set.");
                 if(configWarningBanner) configWarningBanner.classList.remove('hidden');
                 displayErrorState();
                 return;
