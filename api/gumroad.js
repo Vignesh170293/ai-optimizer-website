@@ -7,7 +7,7 @@ export default async function handler(request, response) {
   // --- CONFIGURATION ---
   // Ensure you have these environment variables set in your Vercel project settings.
   const GUMROAD_ACCESS_TOKEN = process.env.GUMROAD_ACCESS_TOKEN;
-  const PRODUCT_ID = process.env.GUMROAD_PRODUCT_ID || 'rdcvzn'; // Use env var or default
+  const PRODUCT_ID = process.env.GUMROAD_PRODUCT_ID || '-2oanPdGBY5IchfIEQjwaw=='; // Use env var or default
 
   // --- Main Logic ---
   try {
@@ -62,7 +62,7 @@ export default async function handler(request, response) {
       formatted_price: productData.product.formatted_price,
       // FIX: Use the permalink from the API if it exists, otherwise fall back to the hardcoded correct value.
       // The frontend expects the short code, not the full URL.
-      permalink: productData.product.permalink || 'rdcvzn', 
+      permalink: productData.product.permalink || '-2oanPdGBY5IchfIEQjwaw==', 
       reviews: reviewsData.reviews.map(review => ({
           name: review.user_name,
           rating: review.rating,
