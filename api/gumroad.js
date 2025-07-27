@@ -60,8 +60,9 @@ export default async function handler(request, response) {
       rating_average: parseFloat(productData.product.rating?.average_rating || 0),
       rating_count: productData.product.rating?.count || 0,
       formatted_price: productData.product.formatted_price,
-      // This is the field that causes the 'Secure Purchase' error if it's missing from the API response.
-      permalink: productData.product.permalink, 
+      // FIX: Use the permalink from the API if it exists, otherwise fall back to the hardcoded correct value.
+      // The frontend expects the short code, not the full URL.
+      permalink: productData.product.permalink || 'rdcvzn', 
       reviews: reviewsData.reviews.map(review => ({
           name: review.user_name,
           rating: review.rating,
