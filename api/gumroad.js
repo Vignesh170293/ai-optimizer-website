@@ -1,21 +1,9 @@
 // /api/gumroad.js
 // This Vercel Serverless Function acts as a secure proxy to the Gumroad API.
 // It relies on Environment Variables set in your Vercel project.
-// Fix: It now explicitly sets CORS headers to prevent cross-origin errors.
+// NOTE: All CORS headers are now managed in the vercel.json file.
 
 export default async function handler(request, response) {
-  // --- Set CORS headers for all responses ---
-  // This allows your frontend (from any origin) to make requests to this API.
-  response.setHeader('Access-Control-Allow-Origin', '*');
-  response.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  // Vercel's Edge Network automatically handles OPTIONS requests.
-  // If the request method is OPTIONS, we can return early.
-  if (request.method === 'OPTIONS') {
-    return response.status(200).end();
-  }
-
   // --- CONFIGURATION ---
   // Ensure you have these environment variables set in your Vercel project settings.
   const GUMROAD_ACCESS_TOKEN = process.env.GUMROAD_ACCESS_TOKEN;
@@ -76,6 +64,7 @@ export default async function handler(request, response) {
     return response.status(200).json(responseData);
 
   } catch (error) {
+    // This will catch any errors from the steps above and log them in Vercel.
     console.error("Error in Vercel function:", error.message);
     return response.status(500).json({ 
       error: "An internal server error occurred while fetching Gumroad data.", 
