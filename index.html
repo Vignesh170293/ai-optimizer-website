@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI System Optimizer - Unlock Peak PC Performance</title>
-    <!-- 
-      Note: The Tailwind CDN is used here for simplicity in this self-contained example.
-      For a production environment, it is recommended to install Tailwind CSS as a PostCSS plugin.
-    -->
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -39,10 +37,13 @@
             border: 1px solid transparent;
             background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)) padding-box,
                         linear-gradient(120deg, #1e3a8a, #3b82f6, #1e3a8a) border-box;
+            display: flex;
+            flex-direction: column;
         }
-        .stat-counter {
+        .stat-counter, .review-card {
             transition: all 0.5s ease-out;
         }
+        /* Scroll-triggered animations */
         [data-scroll] {
             transition: opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1), transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
@@ -99,7 +100,7 @@
                 <div class="glass-card rounded-xl p-4 text-center flex items-center justify-center">
                     <p class="font-semibold text-gray-300">
                         <i class="fas fa-check-circle text-green-400 mr-2"></i>
-                        Rigorously Tested & Optimized for <span class="text-white font-bold">NVIDIA GeForce RTX 3050 Ti Laptop GPU</span>
+                        Rigorously Tested & Optimized for <span class="text-white font-bold">NVIDIA, AMD & Intel GPUs</span>
                     </p>
                 </div>
             </div>
@@ -125,9 +126,7 @@
                         <p class="text-gray-400 mt-2">Happy Customers</p>
                     </div>
                     <div class="glass-card p-8 rounded-2xl">
-                        <p class="text-5xl font-bold text-blue-400">
-                            <span id="rating-stars">...</span>
-                        </p>
+                        <p id="rating-stars" class="text-5xl font-bold text-blue-400">...</p>
                         <p id="rating-text" class="text-gray-400 mt-2">Loading reviews...</p>
                     </div>
                     <div class="glass-card p-8 rounded-2xl">
@@ -184,37 +183,41 @@
         <section id="reviews" class="py-20" data-scroll="out">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center text-white mb-4">What Our Users Are Saying</h2>
-                <p class="text-center text-gray-400 mb-12">Real-time rating and customer count are loaded from Gumroad.<br>Reviews below are illustrative examples.</p>
+                <p class="text-center text-gray-400 mb-12">All data, including ratings and reviews, is loaded in real-time from Gumroad.</p>
                 <div id="reviews-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="review-card p-8 rounded-2xl">
+                    <!-- Loading State Placeholder -->
+                    <div class="review-card p-8 rounded-2xl animate-pulse">
                         <div class="flex items-center mb-4">
-                            <img src="https://i.pravatar.cc/48?u=user1" class="w-12 h-12 rounded-full" alt="User avatar">
-                            <div class="ml-4">
-                                <p class="font-bold text-white">Alex R.</p>
-                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <div class="w-12 h-12 rounded-full bg-slate-700"></div>
+                            <div class="ml-4 flex-1">
+                                <div class="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
+                                <div class="h-3 bg-slate-700 rounded w-1/2"></div>
                             </div>
                         </div>
-                        <p class="text-gray-400 italic">"I was skeptical, but this optimizer gave me a stable 144 FPS on my mid-range rig. The micro-stutters are completely gone. A must-have."</p>
+                        <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-slate-700 rounded w-5/6"></div>
                     </div>
-                    <div class="review-card p-8 rounded-2xl">
-                        <div class="flex items-center mb-4">
-                            <img src="https://i.pravatar.cc/48?u=user2" class="w-12 h-12 rounded-full" alt="User avatar">
-                            <div class="ml-4">
-                                <p class="font-bold text-white">Samantha B.</p>
-                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="review-card p-8 rounded-2xl animate-pulse hidden lg:flex">
+                         <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-slate-700"></div>
+                            <div class="ml-4 flex-1">
+                                <div class="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
+                                <div class="h-3 bg-slate-700 rounded w-1/2"></div>
                             </div>
                         </div>
-                        <p class="text-gray-400 italic">"The best part is that it just works. I installed it, and my laptop runs cooler and quieter during long rendering sessions. It's incredible."</p>
+                        <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-slate-700 rounded w-5/6"></div>
                     </div>
-                    <div class="review-card p-8 rounded-2xl">
+                    <div class="review-card p-8 rounded-2xl animate-pulse hidden lg:flex">
                         <div class="flex items-center mb-4">
-                            <img src="https://i.pravatar.cc/48?u=user3" class="w-12 h-12 rounded-full" alt="User avatar">
-                            <div class="ml-4">
-                                <p class="font-bold text-white">David L.</p>
-                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <div class="w-12 h-12 rounded-full bg-slate-700"></div>
+                            <div class="ml-4 flex-1">
+                                <div class="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
+                                <div class="h-3 bg-slate-700 rounded w-1/2"></div>
                             </div>
                         </div>
-                        <p class="text-gray-400 italic">"The keyless activation was super smooth. The dashboard is clean and gives me all the control I need without being bloated. Highly recommended."</p>
+                        <div class="h-4 bg-slate-700 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-slate-700 rounded w-5/6"></div>
                     </div>
                 </div>
             </div>
@@ -252,18 +255,20 @@
 
     <script type="module">
         // --- ⚠️ CRITICAL CONFIGURATION ⚠️ ---
-        // --- YOU MUST REPLACE THE LINE BELOW WITH YOUR REAL VERCEL URL ---
-        // --- For example: const GUMROAD_PROXY_URL = 'https://my-project-name.vercel.app/api/gumroad'; ---
-        const GUMROAD_PROXY_URL = 'https://ai-optimizer-website-cfrhxrlfx.vercel.app/api/gumroad';
-        
+        // AFTER DEPLOYING TO VERCEL, PASTE YOUR LIVE URL HERE.
+        // It should look like: 'https://your-project-name.vercel.app/api/gumroad'
+        // --- ----------------------------------------------------------------- ---
+        const GUMROAD_PROXY_URL = 'https://ai-optimizer-website-kpohxvzks.vercel.app/api/gumroad'; // <-- PASTE YOUR LIVE VERCEL URL HERE
+
         // --- DOM Elements ---
         const configWarningBanner = document.getElementById('config-warning-banner');
         const salesCounter = document.getElementById('sales-counter');
-        const ratingStars = document.getElementById('rating-stars');
-        const ratingText = document.getElementById('rating-text');
+        const ratingStarsEl = document.getElementById('rating-stars');
+        const ratingTextEl = document.getElementById('rating-text');
         const priceDisplay = document.getElementById('price-display');
         const purchaseLink = document.getElementById('purchase-link');
         const copyrightYear = document.getElementById('copyright-year');
+        const reviewsContainer = document.getElementById('reviews-container');
 
         // --- Main Logic ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -277,14 +282,7 @@
             if (!GUMROAD_PROXY_URL || GUMROAD_PROXY_URL.includes('PASTE-YOUR-LIVE-VERCEL-URL-HERE')) {
                 console.error("CRITICAL: GUMROAD_PROXY_URL is not set. Please update the script with your live Vercel URL.");
                 if(configWarningBanner) configWarningBanner.classList.remove('hidden');
-                
-                if(priceDisplay) priceDisplay.textContent = "Setup Needed";
-                if(salesCounter) salesCounter.textContent = "N/A";
-                if(ratingText) ratingText.textContent = "Config Error";
-                if(purchaseLink) {
-                    purchaseLink.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i>Configure URL`;
-                    purchaseLink.classList.add('bg-red-600', 'hover:bg-red-700');
-                }
+                displayErrorState();
                 return;
             }
 
@@ -292,43 +290,38 @@
             try {
                 const response = await fetch(GUMROAD_PROXY_URL);
                 if (!response.ok) {
-                    throw new Error(`Network response was not ok. Status: ${response.status}`);
+                    const errorData = await response.json();
+                    throw new Error(`Network response was not ok. Status: ${response.status}. Details: ${errorData.details}`);
                 }
                 const data = await response.json();
                 if (data.error) {
                     throw new Error(`API Proxy Error: ${data.details || data.error}`);
                 }
                 
-                updateGumroadStats(data);
+                updatePageWithData(data);
+
             } catch (error) {
                 console.error("--- GUMROAD FETCH FAILED ---");
                 console.error("URL Attempted:", GUMROAD_PROXY_URL);
                 console.error("Error details:", error);
-                
-                if(priceDisplay) priceDisplay.textContent = "N/A";
-                if(salesCounter) salesCounter.textContent = "N/A";
-                if(ratingText) ratingText.textContent = "Data Error";
-                if(purchaseLink) purchaseLink.innerHTML = `<i class="fas fa-times-circle mr-2"></i>Unavailable`;
-
-                console.log("TROUBLESHOOTING: 1. Double-check your GUMROAD_PROXY_URL in the HTML. 2. Go to your Vercel dashboard and check the 'Logs' for your serverless function to see if there are any errors there (e.g., missing GUMROAD_ACCESS_TOKEN).");
+                displayErrorState();
+                console.log("TROUBLESHOOTING: 1. Double-check your GUMROAD_PROXY_URL in this file. 2. Go to your Vercel dashboard and check the 'Logs' for your serverless function to see if there are any errors there (e.g., missing GUMROAD_ACCESS_TOKEN or GUMROAD_PRODUCT_ID environment variables).");
             }
         }
         
         // --- UI Update Functions ---
-        function updateGumroadStats(product) {
-            // Update Price with new format
+        function updatePageWithData(data) {
+            // Update Price, Link, and Sales
             if (priceDisplay) {
-                priceDisplay.innerHTML = `${product.formatted_price} <span class="text-lg font-medium text-gray-400">/ one-time</span>`;
+                priceDisplay.innerHTML = `${data.formatted_price} <span class="text-lg font-medium text-gray-400">/ one-time</span>`;
             }
-            
             if (purchaseLink) {
-                purchaseLink.href = `https://gumroad.com/l/${product.permalink}`;
+                purchaseLink.href = `https://gumroad.com/l/${data.permalink}`;
                 purchaseLink.classList.remove('pointer-events-none', 'opacity-50');
                 purchaseLink.innerHTML = `<i class="fas fa-lock mr-2"></i>Secure Purchase`;
             }
-            
             if (salesCounter) {
-                const targetSales = product.sales_count || 0;
+                const targetSales = data.sales_count || 0;
                 salesCounter.setAttribute('data-target', targetSales);
                 if (isElementInViewport(salesCounter)) {
                     animateCounter(salesCounter, targetSales);
@@ -336,21 +329,60 @@
                 }
             }
 
-            if (ratingStars && ratingText) {
-                const avgRating = product.rating_average || 0;
-                const ratingCount = product.rating_count || 0;
-                let starsHtml = '';
-                for(let i = 1; i <= 5; i++) {
-                    if (i <= avgRating) starsHtml += '<i class="fas fa-star text-yellow-400"></i>';
-                    else if (i - 0.5 <= avgRating) starsHtml += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
-                    else starsHtml += '<i class="far fa-star text-yellow-400"></i>';
-                }
-                ratingStars.innerHTML = starsHtml || 'No Ratings Yet';
-                ratingText.textContent = ratingCount > 0 ? `From ${ratingCount} Gumroad ratings` : 'Be the first to rate!';
+            // Update Average Rating
+            if (ratingStarsEl && ratingTextEl) {
+                const avgRating = data.rating_average || 0;
+                const ratingCount = data.rating_count || 0;
+                ratingStarsEl.innerHTML = generateStarIcons(avgRating, 'fa-2x') || 'No Ratings';
+                ratingTextEl.textContent = ratingCount > 0 ? `From ${ratingCount} Gumroad ratings` : 'Be the first to rate!';
+            }
+
+            // Update Reviews Section
+            if (reviewsContainer) {
+                updateReviews(data.reviews || []);
             }
         }
 
-        // --- Animations ---
+        function updateReviews(reviews) {
+            reviewsContainer.innerHTML = ''; // Clear loading placeholders
+            if (reviews.length === 0) {
+                reviewsContainer.innerHTML = `<p class="text-gray-400 text-center col-span-full">No customer reviews yet. Be the first to leave one!</p>`;
+                return;
+            }
+
+            reviews.forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card p-8 rounded-2xl';
+                reviewCard.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <img src="https://i.pravatar.cc/48?u=${review.avatar_id}" class="w-12 h-12 rounded-full" alt="${review.name}'s avatar">
+                        <div class="ml-4">
+                            <p class="font-bold text-white">${review.name}</p>
+                            <div class="text-yellow-400 text-xs">${generateStarIcons(review.rating, 'fa-xs')}</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 italic flex-grow">"${review.content}"</p>
+                `;
+                reviewsContainer.appendChild(reviewCard);
+            });
+        }
+
+        function displayErrorState() {
+            if(priceDisplay) priceDisplay.textContent = "N/A";
+            if(salesCounter) salesCounter.textContent = "N/A";
+            if(ratingTextEl) ratingTextEl.textContent = "Data Error";
+            if(ratingStarsEl) ratingStarsEl.innerHTML = `<i class="fas fa-exclamation-circle text-red-500 fa-2x"></i>`;
+            if(purchaseLink) {
+                purchaseLink.innerHTML = `<i class="fas fa-times-circle mr-2"></i>Unavailable`;
+                purchaseLink.classList.add('bg-gray-600', 'hover:bg-gray-700');
+                purchaseLink.classList.remove('bg-blue-600');
+            }
+            if(reviewsContainer) {
+                reviewsContainer.innerHTML = `<p class="text-red-400 text-center col-span-full">Could not load reviews. Please check the configuration.</p>`;
+            }
+        }
+
+        // --- Animations & Helpers ---
         function animateCounter(counterElement, target) {
             if (!counterElement || target === undefined) return;
             const start = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
@@ -371,6 +403,16 @@
             requestAnimationFrame(animation);
         }
 
+        function generateStarIcons(rating, sizeClass = '') {
+            let starsHtml = '';
+            for(let i = 1; i <= 5; i++) {
+                if (i <= rating) starsHtml += `<i class="fas fa-star text-yellow-400 ${sizeClass}"></i>`;
+                else if (i - 0.5 <= rating) starsHtml += `<i class="fas fa-star-half-alt text-yellow-400 ${sizeClass}"></i>`;
+                else starsHtml += `<i class="far fa-star text-yellow-400 ${sizeClass}"></i>`;
+            }
+            return starsHtml;
+        }
+
         function setupScrollAnimations() {
             const scrollElements = document.querySelectorAll("[data-scroll]");
             const scrollObserver = new IntersectionObserver((entries) => {
@@ -387,14 +429,13 @@
                         });
                     }
                 });
-            }, { threshold: 0.15 });
+            }, { threshold: 0.1 });
 
             scrollElements.forEach((el) => {
                 scrollObserver.observe(el);
             });
         }
         
-        // --- Helpers ---
         function isElementInViewport(el) {
             if (!el) return false;
             const rect = el.getBoundingClientRect();
