@@ -35,6 +35,11 @@
             background: linear-gradient(145deg, rgba(30, 64, 175, 0.3), rgba(37, 99, 235, 0.3));
             box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
         }
+        .review-card {
+            border: 1px solid transparent;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)) padding-box,
+                        linear-gradient(120deg, #1e3a8a, #3b82f6, #1e3a8a) border-box;
+        }
         .stat-counter {
             transition: all 0.5s ease-out;
         }
@@ -175,6 +180,45 @@
             </div>
         </section>
 
+        <!-- Reviews Section -->
+        <section id="reviews" class="py-20" data-scroll="out">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-white mb-12">What Our Users Are Saying</h2>
+                <div id="reviews-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="review-card p-8 rounded-2xl">
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/48?u=user1" class="w-12 h-12 rounded-full" alt="User avatar">
+                            <div class="ml-4">
+                                <p class="font-bold text-white">Alex R.</p>
+                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic">"I was skeptical, but this optimizer gave me a stable 144 FPS on my mid-range rig. The micro-stutters are completely gone. A must-have."</p>
+                    </div>
+                    <div class="review-card p-8 rounded-2xl">
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/48?u=user2" class="w-12 h-12 rounded-full" alt="User avatar">
+                            <div class="ml-4">
+                                <p class="font-bold text-white">Samantha B.</p>
+                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic">"The best part is that it just works. I installed it, and my laptop runs cooler and quieter during long rendering sessions. It's incredible."</p>
+                    </div>
+                    <div class="review-card p-8 rounded-2xl">
+                        <div class="flex items-center mb-4">
+                            <img src="https://i.pravatar.cc/48?u=user3" class="w-12 h-12 rounded-full" alt="User avatar">
+                            <div class="ml-4">
+                                <p class="font-bold text-white">David L.</p>
+                                <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 italic">"The keyless activation was super smooth. The dashboard is clean and gives me all the control I need without being bloated. Highly recommended."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Pricing Section -->
         <section id="pricing" class="py-20" data-scroll="out">
             <div class="container mx-auto px-6 max-w-md">
@@ -209,7 +253,7 @@
         // --- ⚠️ CRITICAL CONFIGURATION ⚠️ ---
         // --- YOU MUST REPLACE THE LINE BELOW WITH YOUR REAL VERCEL URL ---
         // --- For example: const GUMROAD_PROXY_URL = 'https://my-project-name.vercel.app/api/gumroad'; ---
-        const GUMROAD_PROXY_URL = 'https://ai-optimizer-website-qr2lsby1l.vercel.app/api/gumroad';
+        const GUMROAD_PROXY_URL = 'https://PASTE-YOUR-LIVE-VERCEL-URL-HERE.vercel.app/api/gumroad';
         
         // --- DOM Elements ---
         const configWarningBanner = document.getElementById('config-warning-banner');
@@ -271,7 +315,10 @@
         
         // --- UI Update Functions ---
         function updateGumroadStats(product) {
-            if (priceDisplay) priceDisplay.textContent = product.formatted_price;
+            // Update Price with new format
+            if (priceDisplay) {
+                priceDisplay.innerHTML = `${product.formatted_price} <span class="text-lg font-medium text-gray-400">/ one-time</span>`;
+            }
             
             if (purchaseLink) {
                 purchaseLink.href = `https://gumroad.com/l/${product.permalink}`;
